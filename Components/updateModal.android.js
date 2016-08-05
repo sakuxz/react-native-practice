@@ -22,18 +22,6 @@ var {height, width} = Dimensions.get('window');
 class UpdateModal extends Component {
   constructor(props) {
     super(props);
-    const tempData = (this.props.tempData)?this.props.tempData:{
-      name: '',
-      email: '',
-      facebookId: '',
-      id: 0
-    };
-    this.state = {
-      name: tempData.name,
-      email: tempData.email,
-      facebookId: tempData.facebookId
-    };
-    console.log(tempData);
   }
   render() {
     const tempData = (this.props.tempData)?this.props.tempData:{
@@ -55,21 +43,21 @@ class UpdateModal extends Component {
             <ListItem style={{marginTop:12}}>
                 <InputGroup>
                     <Icon name="ios-person" />
-                    <Input defaultValue={tempData.name.toString()} placeholder="Name" onChangeText={(name) => this.setState({name})} />
+                    <Input defaultValue={tempData.name.toString()} placeholder="Name" onChangeText={(name) => {tempData.name = name;this.props.updateTempData(tempData)}} />
                 </InputGroup>
             </ListItem>
 
             <ListItem style={{marginTop:12}}>
                 <InputGroup>
                     <Icon name="ios-mail" />
-                    <Input defaultValue={tempData.email.toString()} keyboardType='email-address' placeholder="Email" onChangeText={(email) => this.setState({email})} />
+                    <Input defaultValue={tempData.email.toString()} keyboardType='email-address' placeholder="Email" onChangeText={(email) => {tempData.email = email;this.props.updateTempData(tempData)}} />
                 </InputGroup>
             </ListItem>
 
             <ListItem style={{marginTop:12}}>
                 <InputGroup>
                     <Icon name="ios-apps" />
-                    <Input defaultValue={tempData.facebookId.toString()} keyboardType='numeric' placeholder="FacebookId" onChangeText={(facebookId) => this.setState({facebookId})} />
+                    <Input defaultValue={tempData.facebookId.toString()} keyboardType='numeric' placeholder="FacebookId" onChangeText={(facebookId) => {tempData.facebookId = facebookId;this.props.updateTempData(tempData)}} />
                 </InputGroup>
             </ListItem>
           </List>
@@ -80,25 +68,14 @@ class UpdateModal extends Component {
   }
 
   componentDidUpdate(){
-    const tempData = (this.props.tempData)?this.props.tempData:{
-      name: '',
-      email: '',
-      facebookId: '',
-      id: 0
-    };
-    this.state = {
-      name: tempData.name,
-      email: tempData.email,
-      facebookId: tempData.facebookId
-    };
   }
 
   updateFriend(){
-    if(this.state.name && this.state.email && this.state.facebookId){
+    if(this.props.tempData.name && this.props.tempData.email && this.props.tempData.facebookId){
       updateFriendAjax({
-        name: this.state.name,
-        email: this.state.email,
-        facebookId: this.state.facebookId
+        name: this.props.tempData.name,
+        email: this.props.tempData.email,
+        facebookId: this.props.tempData.facebookId
       }, this.props.tempData.id).then(data => {this.props.toggleUpdateModal();})
     }else{
       Alert.alert('Info','尚有欄位未填寫')

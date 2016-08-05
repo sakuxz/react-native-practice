@@ -14,7 +14,7 @@ import {
   TextInput,
   ListView,
   Modal,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import FriendCard from '../Components/friendCard';
 import UpdateModal from '../Components/updateModal';
@@ -75,7 +75,7 @@ class IndexPage extends Component {
 
         <Content style={styles.container}>
 
-          <UpdateModal tempData={this.state.tempData} toggleUpdateModal={this.toggleUpdateModal.bind(this)} updateModal={this.state.updateModal} />
+          <UpdateModal tempData={this.state.tempData} updateTempData={this.updateTempData.bind(this)} toggleUpdateModal={this.toggleUpdateModal.bind(this)} updateModal={this.state.updateModal} />
 
           <ListView
             enableEmptySections={true}
@@ -99,6 +99,12 @@ class IndexPage extends Component {
     this.setState({
       updateModal: !this.state.updateModal,
       tempData: (data)?data:null
+    });
+  }
+
+  updateTempData(data){
+    this.setState({
+      tempData: data
     });
   }
 
