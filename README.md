@@ -15,5 +15,5 @@ npm run dev-a
 
 ## If android can't display font icon
 `
-cp  /node_modules/react-native-vector-icons/Fonts/*.*  /android/app/src/main/assets/fonts/
+cp  /node_modules/react-native-vector-icons/Fonts/*  /android/app/src/main/assets/fonts/
 `
