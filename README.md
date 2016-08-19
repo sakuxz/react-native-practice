@@ -1,5 +1,7 @@
 # react-native-practice
 
+> api using [https://github.com/sakuxz/sails-sample](https://github.com/sakuxz/sails-sample)
+
 prepare env:
 ```
 npm install
